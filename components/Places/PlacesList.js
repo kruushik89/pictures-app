@@ -1,20 +1,31 @@
-import { FlatList, View, Text, StyleSheet } from 'react-native'
+import { FlatList, StyleSheet, Text, View } from 'react-native'
+
+import { Colors } from '../../constants/colors'
 import PlaceItem from './PlaceItem'
-import { Colors } from '../../constans/colors'
+import { useNavigation } from '@react-navigation/native'
 
-const PlacesList = ({ places }) => {
+function PlacesList({ places }) {
 
-    if (places || places.length === 0) {
-        return <View style={styles.fallbackContainer}>
-            <Text style={styles.fallbackText}>No places found. Maybe start adding some!</Text>
-        </View>
+    const navigation = useNavigation()
+
+    if (!places || places.length === 0) {
+        return (
+            <View style={styles.fallbackContainer}>
+                <Text style={styles.fallbackText}>
+                    No places added yet - start adding some!
+                </Text>
+            </View>
+        )
     }
-
+    const selectPlaceHandler = (place) => {
+        navigation.navigate('PlaceDetails', { placeId: place.id })
+    }
     return (
         <FlatList
+            style={styles.list}
             data={places}
             keyExtractor={(item) => item.id}
-            renderItem={({item}) => <PlaceItem place={item}/>}
+            renderItem={({ item }) => <PlaceItem place={item} onSelect={selectPlaceHandler}/>}
         />
     )
 }
@@ -22,6 +33,9 @@ const PlacesList = ({ places }) => {
 export default PlacesList
 
 const styles = StyleSheet.create({
+    list: {
+        margin: 24
+    },
     fallbackContainer: {
         flex: 1,
         justifyContent: 'center',

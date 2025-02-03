@@ -1,23 +1,30 @@
-import { Alert, Button, Text, View } from 'react-native'
-import { launchCameraAsync, useCameraPermissions, PermissionStatus } from 'expo-image-picker'
+import { Alert, Image, StyleSheet, Text, View } from 'react-native'
+import {
+    launchCameraAsync,
+    useCameraPermissions,
+    PermissionStatus
+} from 'expo-image-picker'
+import { useState } from 'react'
 
-// компонент для вибору або зйомки фото
-const ImagePicker = () => {
+import { Colors } from '../../constants/colors'
+import OutlinedButton from '../UI/OutlinedButton'
 
-    const [cameraPermissionInformation, requestPermission] = useCameraPermissions()
+function ImagePicker({ onTakeImage }) {
+    const [pickedImage, setPickedImage] = useState()
+    console.log('pickedImage', pickedImage)
+    const [cameraPermissionInformation, requestPermission] =
+        useCameraPermissions()
 
-    // перевірка дозволів на камеру
-    const verifyPermissions = async () => {
-        // дозвіл для камери не запитується, якщо він вже є
+    async function verifyPermissions() {
         if (cameraPermissionInformation.status === PermissionStatus.UNDETERMINED) {
             const permissionResponse = await requestPermission()
+
             return permissionResponse.granted
         }
 
-        // якщо дозвіл відхилений, виводимо повідомлення
         if (cameraPermissionInformation.status === PermissionStatus.DENIED) {
             Alert.alert(
-                'Insufficient permissions!',
+                'Insufficient Permissions!',
                 'You need to grant camera permissions to use this app.'
             )
             return false
@@ -26,8 +33,7 @@ const ImagePicker = () => {
         return true
     }
 
-    // функція для зйомки фото
-    const takeImageHandler = async () => {
+    async function takeImageHandler() {
         const hasPermission = await verifyPermissions()
 
         if (!hasPermission) {
@@ -39,18 +45,42 @@ const ImagePicker = () => {
             aspect: [16, 9],
             quality: 0.5
         })
-        console.log('image', image)
+        console.log('image', image.assets[0].uri)
+        setPickedImage(image.assets[0].uri)
+        onTakeImage(image.assets[0].uri)
+    }
+
+    let imagePreview = <Text>No image taken yet.</Text>
+
+    if (pickedImage) {
+        imagePreview = <Image style={styles.image} source={{ uri: pickedImage }}/>
     }
 
     return (
         <View>
-            <Text>ImagePicker</Text>
-            <View>
-
-            </View>
-            <Button title="Take Image" onPress={takeImageHandler}/>
+            <View style={styles.imagePreview}>{imagePreview}</View>
+            <OutlinedButton icon="camera" onPress={takeImageHandler}>
+                Take Image
+            </OutlinedButton>
         </View>
     )
 }
 
 export default ImagePicker
+
+const styles = StyleSheet.create({
+    imagePreview: {
+        width: '100%',
+        height: 200,
+        marginVertical: 8,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: Colors.primary100,
+        borderRadius: 4,
+        overflow: 'hidden'
+    },
+    image: {
+        width: '100%',
+        height: '100%'
+    }
+})

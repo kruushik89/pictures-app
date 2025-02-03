@@ -1,0 +1,44 @@
+{
+  "places": [
+    {
+      "id": "Mon Feb 03 2025 10:47:53 GMT+02000.43632312697746184",
+      "title": "test",
+      "imageUri": "file:///data/user/0/host.exp.exponent/cache/ExperienceData/%2540anonymous%252Fpictures-app-9254eaac-1d4e-4571-8012-7b9b2863d75a/ImagePicker/ff9fcbf5-f02b-42b5-8d0b-57400ad80025.jpeg",
+      "address": "1727 Mission St, San Francisco, CA 94103, USA",
+      "location": {
+        "lat": 37.76973334400096,
+        "lng": -122.41979263722898
+      }
+    },
+    {
+      "id": "Mon Feb 03 2025 12:52:21 GMT+02000.7050798350513218",
+      "title": "Cat",
+      "imageUri": "file:///data/user/0/host.exp.exponent/cache/ExperienceData/%2540anonymous%252Fpictures-app-9254eaac-1d4e-4571-8012-7b9b2863d75a/ImagePicker/894a1de6-adb2-4ff4-ba56-5282acadeae2.jpeg",
+      "address": "700 Mason St, San Francisco, CA 94108, USA",
+      "location": {
+        "lat": 37.79015574918024,
+        "lng": -122.41046022623777
+      }
+    },
+    {
+      "id": "Mon Feb 03 2025 14:24:35 GMT+02000.5628173353838349",
+      "title": "Lviv TV",
+      "imageUri": "file:///data/user/0/host.exp.exponent/cache/ExperienceData/%2540anonymous%252Fpictures-app-9254eaac-1d4e-4571-8012-7b9b2863d75a/ImagePicker/b2797041-6b0d-460e-a9e1-db4f55650d3e.jpeg",
+      "address": "Rybna St, 1, L'viv, L'vivs'ka oblast, Ukraine, 79000",
+      "location": {
+        "lat": 49.84537177912317,
+        "lng": 24.030031599104404
+      }
+    },
+    {
+      "id": "Mon Feb 03 2025 15:03:48 GMT+02000.9981612188194416",
+      "title": "London",
+      "imageUri": "file:///data/user/0/host.exp.exponent/cache/ExperienceData/%2540anonymous%252Fpictures-app-9254eaac-1d4e-4571-8012-7b9b2863d75a/ImagePicker/64d0baa1-a5b4-4c99-a4b4-6c52bfb51cb0.jpeg",
+      "address": "2 Emery Hill St, London SW1P 1PE, UK",
+      "location": {
+        "lat": 51.494907133514076,
+        "lng": -0.13679936528205872
+      }
+    }
+  ]
+}
